@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="http://img.xdf.cn/souke/v8_1/js/jquery/jquery.js?v=20160615"></script>
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=CE4092052e0948872df0ad89f8d12eeb"></script>
+    <script type="text/javascript">
+        $(function () {
+            // 创建 Geolocation 对象实例
+            var geolocation = new BMap.Geolocation();
+
+            // getCurrentPosition 方法用于返回用户当前位置
+            geolocation.getCurrentPosition(function (r) {
+                if (this.getStatus() === 0) {
+                    console.log(r.point);  // {lat: 34.2777999, lng: 108.95309828}
+                    alert(r.point.lat + "," + r.point.lng);
+                    alert(r.address.city)
+                }
+                else {
+                    console.log('定位失败，原因：' + this.getStatus());
+                }
+            }, { enableHighAccuracy: true })
+        });
+
+    </script>
+</head>
+
+<body>
+    <div id="location"></div>
+</body>
+</html>

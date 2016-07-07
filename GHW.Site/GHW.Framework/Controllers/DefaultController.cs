@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace GHW.Framework.Controllers
-{
+{ 
     public class DefaultController : Controller
     {
         // GET: Default

@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GHW.Framework", "GHW.Framework\GHW.Framework.csproj", "{0B37B9C6-F5CC-4574-93FF-CC6FF4E23BC5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B37B9C6-F5CC-4574-93FF-CC6FF4E23BC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B37B9C6-F5CC-4574-93FF-CC6FF4E23BC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B37B9C6-F5CC-4574-93FF-CC6FF4E23BC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B37B9C6-F5CC-4574-93FF-CC6FF4E23BC5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

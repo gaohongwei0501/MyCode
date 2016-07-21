@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GHWModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="OptionInfo">
+          <Key>
+            <PropertyRef Name="OptionId" />
+          </Key>
+          <Property Name="OptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuesionId" Type="int" Nullable="false" />
+          <Property Name="OptionKey" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="OptionValue" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="QuestionInfo">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="QuestionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SurveyId" Type="int" Nullable="false" />
+          <Property Name="QuestionTitle" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="QuestionOptionsCount" Type="int" Nullable="false" />
+          <Property Name="RequiredOptionsCount" Type="int" Nullable="false" />
+          <Property Name="IsOrientation" Type="bit" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="RespondentInfo">
+          <Key>
+            <PropertyRef Name="RespondentId" />
+          </Key>
+          <Property Name="RespondentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RespondentName" Type="nvarchar" MaxLength="8" />
+          <Property Name="MobilePhone" Type="nvarchar" MaxLength="16" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="2" />
+          <Property Name="EduBackground" Type="nvarchar" MaxLength="16" />
+          <Property Name="Occupation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Location" Type="nvarchar" MaxLength="16" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="16" />
+          <Property Name="Referrer" Type="nvarchar" MaxLength="16" />
+          <Property Name="Suggestion" Type="nvarchar" MaxLength="256" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="SurveyInfo">
+          <Key>
+            <PropertyRef Name="SurveyId" />
+          </Key>
+          <Property Name="SurveyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SurveyName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="TmplId" Type="int" Nullable="false" />
+          <Property Name="QuestionCount" Type="int" Nullable="false" />
+          <Property Name="SurveyStatus" Type="int" Nullable="false" />
+          <Property Name="StaticUrl" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="RequiredInfos" Type="nvarchar" MaxLength="32" />
+          <Property Name="CreateId" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpDateTime" Type="datetime" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="SurveyResult">
+          <Key>
+            <PropertyRef Name="SurveyResultId" />
+          </Key>
+          <Property Name="SurveyResultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SurveyId" Type="int" Nullable="false" />
+          <Property Name="RespondentId" Type="int" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="SelectedOptions" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TemplateInfo">
+          <Key>
+            <PropertyRef Name="TmplId" />
+          </Key>
+          <Property Name="TmplId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TmplTitle" Type="nvarchar" MaxLength="64" />
+          <Property Name="TmplDescription" Type="nvarchar" MaxLength="512" />
+          <Property Name="PreviewUrl" Type="nvarchar" MaxLength="512" />
+          <Property Name="StoredName" Type="nvarchar" MaxLength="256" />
+          <Property Name="CreateId" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityContainer Name="GHWModelStoreContainer">
+          <EntitySet Name="OptionInfo" EntityType="Self.OptionInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionInfo" EntityType="Self.QuestionInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RespondentInfo" EntityType="Self.RespondentInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurveyInfo" EntityType="Self.SurveyInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurveyResult" EntityType="Self.SurveyResult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemplateInfo" EntityType="Self.TemplateInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GHWModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="OptionInfo">
+          <Key>
+            <PropertyRef Name="OptionId" />
+          </Key>
+          <Property Name="OptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuesionId" Type="Int32" Nullable="false" />
+          <Property Name="OptionKey" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OptionValue" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="QuestionInfo">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="QuestionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SurveyId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionTitle" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="QuestionOptionsCount" Type="Int32" Nullable="false" />
+          <Property Name="RequiredOptionsCount" Type="Int32" Nullable="false" />
+          <Property Name="IsOrientation" Type="Boolean" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RespondentInfo">
+          <Key>
+            <PropertyRef Name="RespondentId" />
+          </Key>
+          <Property Name="RespondentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RespondentName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="MobilePhone" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Gender" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="EduBackground" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Occupation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Referrer" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Suggestion" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SurveyInfo">
+          <Key>
+            <PropertyRef Name="SurveyId" />
+          </Key>
+          <Property Name="SurveyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SurveyName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TmplId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionCount" Type="Int32" Nullable="false" />
+          <Property Name="SurveyStatus" Type="Int32" Nullable="false" />
+          <Property Name="StaticUrl" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RequiredInfos" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="CreateId" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SurveyResult">
+          <Key>
+            <PropertyRef Name="SurveyResultId" />
+          </Key>
+          <Property Name="SurveyResultId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SurveyId" Type="Int32" Nullable="false" />
+          <Property Name="RespondentId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="SelectedOptions" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="TemplateInfo">
+          <Key>
+            <PropertyRef Name="TmplId" />
+          </Key>
+          <Property Name="TmplId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TmplTitle" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="TmplDescription" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="PreviewUrl" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="StoredName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreateId" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" />
+          <Property Name="Remark" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RealName" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="OptionInfo" EntityType="Self.OptionInfo" />
+          <EntitySet Name="QuestionInfo" EntityType="Self.QuestionInfo" />
+          <EntitySet Name="RespondentInfo" EntityType="Self.RespondentInfo" />
+          <EntitySet Name="SurveyInfo" EntityType="Self.SurveyInfo" />
+          <EntitySet Name="SurveyResult" EntityType="Self.SurveyResult" />
+          <EntitySet Name="TemplateInfo" EntityType="Self.TemplateInfo" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GHWModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="OptionInfo">
+            <EntityTypeMapping TypeName="GHWModel.OptionInfo">
+              <MappingFragment StoreEntitySet="OptionInfo">
+                <ScalarProperty Name="OptionId" ColumnName="OptionId" />
+                <ScalarProperty Name="QuesionId" ColumnName="QuesionId" />
+                <ScalarProperty Name="OptionKey" ColumnName="OptionKey" />
+                <ScalarProperty Name="OptionValue" ColumnName="OptionValue" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionInfo">
+            <EntityTypeMapping TypeName="GHWModel.QuestionInfo">
+              <MappingFragment StoreEntitySet="QuestionInfo">
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="SurveyId" ColumnName="SurveyId" />
+                <ScalarProperty Name="QuestionTitle" ColumnName="QuestionTitle" />
+                <ScalarProperty Name="QuestionOptionsCount" ColumnName="QuestionOptionsCount" />
+                <ScalarProperty Name="RequiredOptionsCount" ColumnName="RequiredOptionsCount" />
+                <ScalarProperty Name="IsOrientation" ColumnName="IsOrientation" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RespondentInfo">
+            <EntityTypeMapping TypeName="GHWModel.RespondentInfo">
+              <MappingFragment StoreEntitySet="RespondentInfo">
+                <ScalarProperty Name="RespondentId" ColumnName="RespondentId" />
+                <ScalarProperty Name="RespondentName" ColumnName="RespondentName" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="EduBackground" ColumnName="EduBackground" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="Referrer" ColumnName="Referrer" />
+                <ScalarProperty Name="Suggestion" ColumnName="Suggestion" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveyInfo">
+            <EntityTypeMapping TypeName="GHWModel.SurveyInfo">
+              <MappingFragment StoreEntitySet="SurveyInfo">
+                <ScalarProperty Name="SurveyId" ColumnName="SurveyId" />
+                <ScalarProperty Name="SurveyName" ColumnName="SurveyName" />
+                <ScalarProperty Name="TmplId" ColumnName="TmplId" />
+                <ScalarProperty Name="QuestionCount" ColumnName="QuestionCount" />
+                <ScalarProperty Name="SurveyStatus" ColumnName="SurveyStatus" />
+                <ScalarProperty Name="StaticUrl" ColumnName="StaticUrl" />
+                <ScalarProperty Name="RequiredInfos" ColumnName="RequiredInfos" />
+                <ScalarProperty Name="CreateId" ColumnName="CreateId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpDateTime" ColumnName="UpDateTime" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveyResult">
+            <EntityTypeMapping TypeName="GHWModel.SurveyResult">
+              <MappingFragment StoreEntitySet="SurveyResult">
+                <ScalarProperty Name="SurveyResultId" ColumnName="SurveyResultId" />
+                <ScalarProperty Name="SurveyId" ColumnName="SurveyId" />
+                <ScalarProperty Name="RespondentId" ColumnName="RespondentId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="SelectedOptions" ColumnName="SelectedOptions" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemplateInfo">
+            <EntityTypeMapping TypeName="GHWModel.TemplateInfo">
+              <MappingFragment StoreEntitySet="TemplateInfo">
+                <ScalarProperty Name="TmplId" ColumnName="TmplId" />
+                <ScalarProperty Name="TmplTitle" ColumnName="TmplTitle" />
+                <ScalarProperty Name="TmplDescription" ColumnName="TmplDescription" />
+                <ScalarProperty Name="PreviewUrl" ColumnName="PreviewUrl" />
+                <ScalarProperty Name="StoredName" ColumnName="StoredName" />
+                <ScalarProperty Name="CreateId" ColumnName="CreateId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="GHWModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

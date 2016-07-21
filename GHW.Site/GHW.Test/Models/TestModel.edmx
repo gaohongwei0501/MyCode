@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TestModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TestModelStoreContainer">
+    <EntitySet Name="StudentSet" EntityType="TestModel.Store.StudentSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClassSet" EntityType="TestModel.Store.ClassSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ClassStudent" Association="TestModel.Store.ClassStudent">
+      <End Role="Class" EntitySet="ClassSet" />
+      <End Role="Student" EntitySet="StudentSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="StudentSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="Gender" Type="bit" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="CId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ClassSet">
+    <Key>
+      <PropertyRef Name="CId" />
+    </Key>
+    <Property Name="CId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CName" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="CCount" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CImg" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CIsDelete" Type="bit" Nullable="false" />
+    <Property Name="CAddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="ClassStudent">
+    <End Role="Class" Type="TestModel.Store.ClassSet" Multiplicity="0..1" />
+    <End Role="Student" Type="TestModel.Store.StudentSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="CId" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="CId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="TestModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="TestModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="StudentSet" EntityType="TestModel.Student" />
+          <EntitySet Name="ClassSet" EntityType="TestModel.Class" />
+          <AssociationSet Name="ClassStudent" Association="TestModel.ClassStudent">
+            <End Role="Class" EntitySet="ClassSet" />
+            <End Role="Student" EntitySet="StudentSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" >
+            <Documentation>
+              <LongDescription>主键</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="32" >
+            <Documentation>
+              <LongDescription>姓名</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Name="Gender" Type="Boolean" Nullable="false" >
+            <Documentation>
+              <LongDescription>性别</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" >
+            <Documentation>
+              <LongDescription>是否删除</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Name="AddTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Class" Relationship="TestModel.ClassStudent" FromRole="Student" ToRole="Class" />
+          <Property Name="CId" Type="Int32" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="CId" />
+          </Key>
+          <Property Name="CId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CName" Type="String" Nullable="false" MaxLength="32" />
+          <Property Name="CCount" Type="String" Nullable="false" />
+          <Property Name="CImg" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="CIsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CAddTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="TestModel.ClassStudent" FromRole="Class" ToRole="Student" />
+        </EntityType>
+        <Association Name="ClassStudent">
+          <End Type="TestModel.Class" Role="Class" Multiplicity="0..1" />
+          <End Type="TestModel.Student" Role="Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="CId" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="CId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestModelStoreContainer" CdmEntityContainer="TestModelContainer">
+    <EntitySetMapping Name="StudentSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TestModel.Student)">
+        <MappingFragment StoreEntitySet="StudentSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="CId" ColumnName="CId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TestModel.Class)">
+        <MappingFragment StoreEntitySet="ClassSet">
+          <ScalarProperty Name="CId" ColumnName="CId" />
+          <ScalarProperty Name="CName" ColumnName="CName" />
+          <ScalarProperty Name="CCount" ColumnName="CCount" />
+          <ScalarProperty Name="CImg" ColumnName="CImg" />
+          <ScalarProperty Name="CIsDelete" ColumnName="CIsDelete" />
+          <ScalarProperty Name="CAddTime" ColumnName="CAddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
